@@ -1,4 +1,4 @@
-# Pierre's Authentic Treats
+# Travel Blogger
 
 ### By Eusebie Siebenberg, Laura Hope, and Emma Gerigscott
 
