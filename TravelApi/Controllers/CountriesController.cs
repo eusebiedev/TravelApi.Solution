@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TravelApi.Models;
 
 namespace TravelApi.Controllers
-{     
+{   
   [Route("api/[controller]")]
   [ApiController]
   public class CountriesController : ControllerBase
@@ -17,7 +17,7 @@ namespace TravelApi.Controllers
 
     // GET api/countries
     [HttpGet]
-    public async Task<List<Country>> Get(string name, string language, int population, string climate)
+    public async Task<List<Country>> Get(string name, string language, int population, string climate, string sortBy, bool random=false)
     {
       IQueryable<Country> query = _db.Countries
                                       .Include(country => country.Reviews)
@@ -43,6 +43,23 @@ namespace TravelApi.Controllers
         query = query.Where(entry => entry.Climate == climate);
       }
 
+      if (sortBy != null)
+      {
+        if (sortBy.ToLower() == "popular")
+        {
+          query = query.OrderByDescending(c => c.Reviews.Count);
+        }
+        else if (sortBy.ToLower() == "unpopular")
+        {
+          query = query.OrderBy(c => c.Reviews.Count);
+        }      }
+
+      if (random)
+      {
+        Random randomInt = new Random();
+        int id = randomInt.Next(1, _db.Countries.ToList().Count);
+        query = query.Where(c => c.CountryId == id);
+      }
       return await query.ToListAsync();
     }
 
@@ -124,3 +141,4 @@ namespace TravelApi.Controllers
 
   }
 }
+
