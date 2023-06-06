@@ -111,11 +111,30 @@ namespace TravelApi.Migrations
                     b.Property<string>("Text")
                         .HasColumnType("longtext");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("ReviewId");
 
                     b.HasIndex("CountryId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("TravelApi.Models.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("TravelApi.Models.Review", b =>
@@ -125,9 +144,20 @@ namespace TravelApi.Migrations
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("TravelApi.Models.User", null)
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TravelApi.Models.Country", b =>
+                {
+                    b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("TravelApi.Models.User", b =>
                 {
                     b.Navigation("Reviews");
                 });

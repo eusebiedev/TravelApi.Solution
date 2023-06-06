@@ -10,8 +10,8 @@ using TravelApi.Models;
 namespace TravelApi.Migrations
 {
     [DbContext(typeof(TravelApiContext))]
-    [Migration("20230605184105_AddReviewModel")]
-    partial class AddReviewModel
+    [Migration("20230606165907_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -113,25 +113,53 @@ namespace TravelApi.Migrations
                     b.Property<string>("Text")
                         .HasColumnType("longtext");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("ReviewId");
 
                     b.HasIndex("CountryId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("TravelApi.Models.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("TravelApi.Models.Review", b =>
                 {
-                    b.HasOne("TravelApi.Models.Country", "Country")
+                    b.HasOne("TravelApi.Models.Country", null)
                         .WithMany("Reviews")
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Country");
+                    b.HasOne("TravelApi.Models.User", null)
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TravelApi.Models.Country", b =>
+                {
+                    b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("TravelApi.Models.User", b =>
                 {
                     b.Navigation("Reviews");
                 });
