@@ -23,7 +23,7 @@ Add a review on our travel API! Visit countries you've never heard of before and
 
 ## Database Structure
 
-![image of schema connections](../TravelApi.Solution/TravelApi/wwwroot/img/travelSchema.png)
+![image of schema connections](./TravelApi/wwwroot/img/travelSchema.png)
 
 ## Database Setup Instructions
 
@@ -51,31 +51,59 @@ Add a review on our travel API! Visit countries you've never heard of before and
 ## Using This API
 * Endpoints for this API are as follows:
 ```
-GET http://localhost:5000/api/countries/
-GET http://localhost:5000/api/countries/{id}
-POST http://localhost:5000/api/countries/
-PUT http://localhost:5000/api/countries/{id}
-DELETE http://localhost:5000/api/countries/{id}
-GET http://localhost:5000/api/reviews/
-POST http://localhost:500/api/reviews/
+Countries:
+GET https://localhost:5001/api/countries/
+GET https://localhost:5001/api/countries/{id}
+POST https://localhost:5001/api/countries/
+PUT https://localhost:5001/api/countries/{id}
+DELETE https://localhost:5001/api/countries/{id}
+
+Reviews:
+GET https://localhost:5001/api/reviews/
+POST https://localhost:5001/api/reviews/
+GET https://localhost:5001/api/reviews/{id}
+
+Users:
+GET https://localhost:5001/api/users/
+POST https://localhost:5001/api/users/
+GET https://localhost:5001/api/users/{id}
+PUT https://localhost:5001/api/users/{id}
+DELETE https:///localhost:5001/users/{id}
+PUT https:///localhost:5001/users/{userId}/reviews/{reviewId}
+DELETE https:///localhost:5001/users/{userId}/reviews/{reviewId}
+
 ```
 * In your terminal run ```dotnet watch run``` in the project directory.
 * In your browser open https://localhost:5001/swagger/index.html
 * Use the GUI to navigate the API
 
-* Query Parameters for a GET Request on Countries: 
+* Query Parameters for a GET Request on **Countries**: 
 
-| Parameter  | Type   | Required     | Description                                      |
-|----------- |-----   | ---------    | -------------                                    |
-| Name       | String | not required | Returns countries with a matching name value     |
-| Language   | String | not required | Returns countries with a matching language value |
-| Climate    | String | not required | Returns countries with a matching climate value  |
-| Population | Int    | not required | Returns countries with a matching population value |
+| Parameter  | Type   | Required     | Description                                      | Sample Url  |
+|----------- |-----   | ---------    | -------------                                    | ----------  |
+| Name       | String | not required | Returns countries with a matching name value     | https://locoalhost:5001/api/countries?name={COUNTRYNAME} |
+| Language   | String | not required | Returns countries with a matching language value | https://locoalhost:5001/api/countries?language={LANGUAGE} |
+| Climate    | String | not required | Returns countries with a matching climate value  | https://locoalhost:5001/api/countries?climate={CLIMATE} |
+| Population | Int    | not required | Returns countries with a matching population value | https://locoalhost:5001/api/countries?population={NUMBER} |
+| SortBy | string | not required | Sorts by "popular" or "unpopular" | https://localhost:5001/api/countries?sortBy={popular/unpopular} |
+| Random | boolean | not required | Returns a random Country, Default is False | https://locoalhost:5001/api/countries?random={TRUE} |
+
+* Query Parameters for a GET Request on **Reviews**: 
+
+| Parameter  | Type   | Required     | Description                                      | Sample Url  |
+|----------- |-----   | ---------    | -------------                                    | ----------  |
+| Text       | String | not required | Returns reviews with matching text value     | https://locoalhost:5001/api/reviews?text={TEXTCONTENT} |
+| CountryId   | Int | not required | Returns reviews with a matching countryId value | https://locoalhost:5001/api/reviews?countryId={Number} |
+| Country Name    | String | not required | Returns reviews with matching country name  | https://locoalhost:5001/api/reviews?countryName={COUNTRYNAME} |
+| UserId | Int    | not required | Returns reviews with a matching userId | https://locoalhost:5001/api/reviews?userId={NUMBER} |
+| UserName | String    | not required | Returns reviews with a matching username | https://locoalhost:5001/api/reviews?userName={USERNAME} |
+| Random | boolean | not required | Returns a random Review, Default is False | https://locoalhost:5001/api/reviews?random={TRUE} |
+
 
 
 ## Known Bugs
 
-* _No users...yet_
+
 
 ## License
 [MIT](https://opensource.org/licenses/MIT)  
