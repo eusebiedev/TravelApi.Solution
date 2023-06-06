@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TravelApi.Models;
 
 namespace TravelApi.Controllers
-{
+{     
   [Route("api/[controller]")]
   [ApiController]
   public class CountriesController : ControllerBase

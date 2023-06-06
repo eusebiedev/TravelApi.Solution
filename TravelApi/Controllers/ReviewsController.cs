@@ -51,76 +51,83 @@ namespace TravelApi.Controllers
     [HttpPost]
     public async Task<ActionResult<Review>> Post([FromBody] Review review)
     {
-      #nullable enable
+      // #nullable enable
       Country thisCountry = await _db.Countries
                                         .Include(country => country.Reviews)
                                         .FirstOrDefaultAsync(country => country.CountryId == review.CountryId);
-      #nullable disable
+      // #nullable disable
+      User thisUser = await _db.Users
+                              .Include(user => user.Reviews)
+                              .FirstOrDefaultAsync(user => user.UserId == review.UserId);
       if (thisCountry == null)
       {
         return NotFound("this country doesn't exist");
       }
+      else if (thisUser == null)
+      {
+        return NotFound("this user does not exist");
+      }
       else
       {
-        review.CountryId = thisCountry.CountryId;
+        // review.CountryId = thisCountry.CountryId;
         _db.Reviews.Add(review);
         await _db.SaveChangesAsync();
+        thisUser.Reviews.Add(review);
         thisCountry.Reviews.Add(review);
         await _db.SaveChangesAsync();
         return CreatedAtAction(nameof(GetReview), new { id = review.ReviewId }, review);
       }
     }
 
-    // // PUT: api/Countries/7
-    // [HttpPut("{id}")]
-    // public async Task<IActionResult> Put(int id, Country country)
-    // {
-    //   if (id != country.CountryId)
-    //   {
-    //     return BadRequest();
-    //   }
+    // PUT: api/Countries/7
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Put(int id, Review review)
+    {
+      if (id != review.ReviewId)
+      {
+        return BadRequest();
+      }
 
-    //   _db.Countries.Update(country);
+      _db.Reviews.Update(review);
 
-    //   try
-    //   {
-    //     await _db.SaveChangesAsync();
-    //   }
-    //   catch (DbUpdateConcurrencyException)
-    //   {
-    //     if (!CountryExists(id))
-    //     {
-    //       return NotFound();
-    //     }
-    //     else
-    //     {
-    //       throw;
-    //     }
-    //   }
+      try
+      {
+        await _db.SaveChangesAsync();
+      }
+      catch (DbUpdateConcurrencyException)
+      {
+        if (!ReviewExists(id))
+        {
+          return NotFound();
+        }
+        else
+        {
+          throw;
+        }
+      }
 
-    //   return NoContent();
-    // }
+      return NoContent();
+    }
 
-    // // DELETE: api/Countries/7
-    // [HttpDelete("{id}")]
-    // public async Task<IActionResult> DeleteCountry(int id)
-    // {
-    //   Country country = await _db.Countries.FindAsync(id);
-    //   if (country == null)
-    //   {
-    //     return NotFound();
-    //   }
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteReview(int id)
+    {
+      Review review = await _db.Reviews.FindAsync(id);
+      if (review == null)
+      {
+        return NotFound();
+      }
 
-    //   _db.Countries.Remove(country);
-    //   await _db.SaveChangesAsync();
+      _db.Reviews.Remove(review);
+      await _db.SaveChangesAsync();
 
-    //   return NoContent();
-    // }
+      return NoContent();
+    }
 
-    // private bool CountryExists(int id)
-    // {
-    //   return _db.Countries.Any(e => e.CountryId == id);
-    // }
+    private bool ReviewExists(int id)
+    {
+      return _db.Reviews.Any(e => e.ReviewId == id);
+    }
 
   }
 }
