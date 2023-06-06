@@ -45,6 +45,8 @@ namespace TravelApi.Controllers
       return user;
     }
 
+    
+
     [HttpPost]
     public async Task<ActionResult<User>> Post([FromBody] User user)
     {
@@ -99,6 +101,64 @@ namespace TravelApi.Controllers
     private bool UserExists(int id)
     {
       return _db.Users.Any(e => e.UserId == id);
+    }
+
+    [HttpPut("{userId}/reviews/{reviewId}")]
+    public async Task<IActionResult> Put(int userId, int reviewId, Review review)
+    {
+      if (reviewId != review.ReviewId)
+      {
+        return BadRequest();
+      }
+      else if (userId != review.UserId)
+      {
+        return Unauthorized();
+      }
+      else
+      {
+        _db.Reviews.Update(review);
+      }
+
+      try
+      {
+        await _db.SaveChangesAsync();
+      }
+      catch (DbUpdateConcurrencyException)
+      {
+        if (!ReviewExists(reviewId))
+        {
+          return NotFound();
+        }
+        else
+        {
+          throw;
+        }
+      }
+
+      return NoContent();
+    }
+    [HttpDelete("{userId}/reviews/{reviewId}")]
+    public async Task<IActionResult> DeleteReview(int reviewId, int userId)
+    {
+      Review review = await _db.Reviews.FindAsync(reviewId);
+      if (review == null)
+      {
+        return NotFound();
+      }
+      else if (userId != review.UserId)
+      {
+        return Unauthorized("You are not the owner of this review");
+      }
+
+      _db.Reviews.Remove(review);
+      await _db.SaveChangesAsync();
+
+      return NoContent();
+    }
+
+    private bool ReviewExists(int id)
+    {
+      return _db.Reviews.Any(e => e.ReviewId == id);
     }
   }
 }

@@ -22,7 +22,9 @@ namespace TravelApi.Models
           new Country { CountryId = 4, Name = "Western Democratic Coalition of Dragons", Language = "Dragonian", Climate = "Sweltering and Lava", Population = 3 },
           new Country { CountryId = 5, Name = "Cheese Island", Language = "Swiss", Climate = "Gooey", Population = 72 }, 
           new Country { CountryId = 6, Name = "Pants", Language = "Flubber", Climate = "Subtropical", Population = 7200 },
-          new Country { CountryId = 7, Name = "Sporkonia", Language = "Sporkian", Climate = "Hot and Damp", Population = 840 }
+          new Country { CountryId = 7, Name = "Sporkonia", Language = "Sporkian", Climate = "Hot and Damp", Population = 840 },
+          new Country { CountryId = 8, Name = "Coconut Land", Language = "Nut", Climate = "Desert Island Vibe", Population = 2 },
+          new Country { CountryId = 9, Name = "Magnet Calendar", Language = "Sharpie", Climate = "Glossy", Population = 7600 }
         );
     }
   }
