@@ -81,24 +81,25 @@ DELETE https:///localhost:5001/users/{userId}/reviews/{reviewId}
 
 | Parameter  | Type   | Required     | Description                                      | Sample Url  |
 |----------- |-----   | ---------    | -------------                                    | ----------  |
-| Name       | String | not required | Returns countries with a matching name value     | https://locoalhost:5001/api/countries?name={COUNTRYNAME} |
-| Language   | String | not required | Returns countries with a matching language value | https://locoalhost:5001/api/countries?language={LANGUAGE} |
-| Climate    | String | not required | Returns countries with a matching climate value  | https://locoalhost:5001/api/countries?climate={CLIMATE} |
-| Population | Int    | not required | Returns countries with a matching population value | https://locoalhost:5001/api/countries?population={NUMBER} |
+| Name       | String | not required | Returns countries with a matching name value     | https://localhost:5001/api/countries?name={COUNTRYNAME} |
+| Language   | String | not required | Returns countries with a matching language value | https://localhost:5001/api/countries?language={LANGUAGE} |
+| Climate    | String | not required | Returns countries with a matching climate value  | https://localhost:5001/api/countries?climate={CLIMATE} |
+| Population | Int    | not required | Returns countries with a matching population value | https://localhost:5001/api/countries?population={NUMBER} |
 | SortBy | string | not required | Sorts by "popular" or "unpopular" | https://localhost:5001/api/countries?sortBy={popular/unpopular} |
-| Random | boolean | not required | Returns a random Country, Default is False | https://locoalhost:5001/api/countries?random={TRUE} |
+| Random | boolean | not required | Returns a random Country, Default is False | https://localhost:5001/api/countries?random={TRUE} |
+| Page Number + Page Size | int, int | not required | Returns countries with user selected page number & page size | https://localhost:5001/api/countries?pageNumber={PAGENUMBER}&pageSize={PAGESIZE} |
 
 * Query Parameters for a GET Request on **Reviews**: 
 
 | Parameter  | Type   | Required     | Description                                      | Sample Url  |
 |----------- |-----   | ---------    | -------------                                    | ----------  |
-| Text       | String | not required | Returns reviews with matching text value     | https://locoalhost:5001/api/reviews?text={TEXTCONTENT} |
-| CountryId   | Int | not required | Returns reviews with a matching countryId value | https://locoalhost:5001/api/reviews?countryId={Number} |
-| Country Name    | String | not required | Returns reviews with matching country name  | https://locoalhost:5001/api/reviews?countryName={COUNTRYNAME} |
-| UserId | Int    | not required | Returns reviews with a matching userId | https://locoalhost:5001/api/reviews?userId={NUMBER} |
-| UserName | String    | not required | Returns reviews with a matching username | https://locoalhost:5001/api/reviews?userName={USERNAME} |
-| Random | boolean | not required | Returns a random Review, Default is False | https://locoalhost:5001/api/reviews?random={TRUE} |
-
+| Text       | String | not required | Returns reviews with matching text value     | https://localhost:5001/api/reviews?text={TEXTCONTENT} |
+| CountryId   | Int | not required | Returns reviews with a matching countryId value | https://localhost:5001/api/reviews?countryId={Number} |
+| Country Name    | String | not required | Returns reviews with matching country name  | https://localhost:5001/api/reviews?countryName={COUNTRYNAME} |
+| UserId | Int    | not required | Returns reviews with a matching userId | https://localhost:5001/api/reviews?userId={NUMBER} |
+| UserName | String    | not required | Returns reviews with a matching username | https://localhost:5001/api/reviews?userName={USERNAME} |
+| Random | boolean | not required | Returns a random Review, Default is False | https://localhost:5001/api/reviews?random={TRUE} |
+| Page Number + Page Size | int, int | not required | Returns reviews with user selected page number & page size | https://localhost:5001/api/reviews?pageNumber={PAGENUMBER}&pageSize={PAGESIZE} |
 
 
 ## Known Bugs
