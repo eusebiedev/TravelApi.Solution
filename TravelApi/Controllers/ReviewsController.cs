@@ -17,7 +17,7 @@ namespace TravelApi.Controllers
 
     // GET api/reviews
     [HttpGet]
-    public async Task<List<Review>> Get(string text, int countryId, int userId, string countryName, string userName, bool random = false)
+    public async Task<List<Review>> Get(int pageNumber, int pageSize, string text, int countryId, int userId, string countryName, string userName, bool random = false)
     {
       IQueryable<Review> query = _db.Reviews.AsQueryable();
 
@@ -53,7 +53,10 @@ namespace TravelApi.Controllers
         int id = randomInt.Next(1, _db.Reviews.ToList().Count);
         query = query.Where(r => r.ReviewId == id);
       }
-
+      if (pageNumber > 0 && pageSize > 0)
+      {
+        query = query.Skip((pageNumber - 1) * pageSize).Take(pageSize); 
+      }
       return await query.ToListAsync();
     }
 
