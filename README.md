@@ -81,6 +81,7 @@ DELETE https:///localhost:5001/users/{userId}/reviews/{reviewId}
 
 | Parameter  | Type   | Required     | Description                                      | Sample Url  |
 |----------- |-----   | ---------    | -------------                                    | ----------  |
+| Countries | List | not required | Returns a list of all countries in database | https://localhost:5001/api/countries |
 | Name       | String | not required | Returns countries with a matching name value     | https://localhost:5001/api/countries?name={COUNTRYNAME} |
 | Language   | String | not required | Returns countries with a matching language value | https://localhost:5001/api/countries?language={LANGUAGE} |
 | Climate    | String | not required | Returns countries with a matching climate value  | https://localhost:5001/api/countries?climate={CLIMATE} |
@@ -93,6 +94,7 @@ DELETE https:///localhost:5001/users/{userId}/reviews/{reviewId}
 
 | Parameter  | Type   | Required     | Description                                      | Sample Url  |
 |----------- |-----   | ---------    | -------------                                    | ----------  |
+| Reviews | List | not required | Returns a list of all reviews in database | https://localhost:5001/api/reviews |
 | Text       | String | not required | Returns reviews with matching text value     | https://localhost:5001/api/reviews?text={TEXTCONTENT} |
 | CountryId   | Int | not required | Returns reviews with a matching countryId value | https://localhost:5001/api/reviews?countryId={Number} |
 | Country Name    | String | not required | Returns reviews with matching country name  | https://localhost:5001/api/reviews?countryName={COUNTRYNAME} |
@@ -100,6 +102,15 @@ DELETE https:///localhost:5001/users/{userId}/reviews/{reviewId}
 | UserName | String    | not required | Returns reviews with a matching username | https://localhost:5001/api/reviews?userName={USERNAME} |
 | Random | boolean | not required | Returns a random Review, Default is False | https://localhost:5001/api/reviews?random={TRUE} |
 | Page Number + Page Size | int, int | not required | Returns reviews with user selected page number & page size | https://localhost:5001/api/reviews?pageNumber={PAGENUMBER}&pageSize={PAGESIZE} |
+
+* Query Parameters for a GET Request on **Users**:
+
+| Parameter  | Type   | Required     | Description                                      | Sample Url  |
+|----------- |-----   | ---------    | -------------                                    | ----------  |
+| Users | List | not required | Returns a list of all users in database | https://localhost:5001/api/users |
+| User Name | String | not required | Returns a user with matching user name  | https://localhost:5001/api/users?username={USERNAME} |
+| UserId | int | not required | Returns a user with matching userId | https://localhost:5001/api/users/{NUMBER} |
+
 
 
 ## Known Bugs
