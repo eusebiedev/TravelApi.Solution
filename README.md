@@ -21,7 +21,7 @@ Add a review on our travel API! Visit countries you've never heard of before and
 
 ## Database Structure
 
-![image of schema connections](wwwroot/img/travelShema.png)
+![schema](/TravelApi/wwwroot/img/travelShema.png)
 
 ## Database Setup Instructions
 
