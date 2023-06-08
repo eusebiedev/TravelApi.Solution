@@ -2,10 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TravelApi.Models;
 
-namespace TravelApi.Controllers
+namespace TravelApi.Controllers.v2
 {
-  [Route("api/[controller]")]
-  [ApiController]
+  [ApiController] 
+  [Route("api/v{version:apiVersion}/[controller]")]
+  [ApiVersion("2.0")]
   public class ReviewsController : ControllerBase
   {
     private readonly TravelApiContext _db;
